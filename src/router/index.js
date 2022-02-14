@@ -11,7 +11,7 @@ import guest from '@/middleware/guest'
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     meta:{layout:'main'},
     component: Home
   },
@@ -25,12 +25,14 @@ const routes = [
   {
     path: '/category/create',
     name: 'category.create',
+    beforeEnter: auth,
     meta:{layout:'main'},
     component: CreateCategory
   },
   {
     path: '/category/:id',
     name: 'category.edit',
+    beforeEnter: auth,
     meta:{layout:'main'},
     component:CategoryEdit
   },
@@ -38,7 +40,7 @@ const routes = [
     path: '/login',
     name: 'login',
     beforeEnter: guest,
-    //meta:{layout:'main'},
+    meta:{layout:'auth'},
     component: Login
   },
   {

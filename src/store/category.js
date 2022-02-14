@@ -32,7 +32,10 @@ export default {
     },
     actions: {
         async fetchCategories(ctx) {
-            await axios.get("http://127.0.0.1:8000/api/category")
+            console.log(localStorage.getItem('authToken'))
+            await axios.get("http://127.0.0.1:8000/api/category",{
+                headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
+            })
                 .then(res => res.data)
                 .then(res => {
                     ctx.commit("clearValidation")
@@ -45,7 +48,9 @@ export default {
                 })
         },
         async fetchCategory(ctx,id) {
-            await axios.get(`http://127.0.0.1:8000/api/category/${id}`)
+            await axios.get(`http://127.0.0.1:8000/api/category/${id}`,{
+                headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
+            })
                 .then(res => res.data)
                 .then(res => {
                     ctx.commit("setForm",{
@@ -57,7 +62,9 @@ export default {
                 })
         },
        async createCategory(ctx, {formData}) {
-            await axios.post("http://127.0.0.1:8000/api/category", formData)
+            await axios.post("http://127.0.0.1:8000/api/category", formData,{
+                headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
+            })
                 .then(function (response) {
                     ctx.commit("clearValidation")
                     ctx.commit("setSuccess",true)
@@ -69,7 +76,9 @@ export default {
                 })
         },
         async updateCategory(ctx, {formData,id}) {
-            await axios.put(`http://127.0.0.1:8000/api/category/${id}`, formData)
+            await axios.put(`http://127.0.0.1:8000/api/category/${id}`, formData,{
+                headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
+            })
                 .then(function (response) {
                     ctx.commit("clearValidation")
                     ctx.commit("setSuccess",true)
@@ -80,7 +89,9 @@ export default {
                 })
         },
         async deleteCategory(ctx,id){
-            await axios.delete(`http://127.0.0.1:8000/api/category/${id}`)
+            await axios.delete(`http://127.0.0.1:8000/api/category/${id}`,{
+                headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
+            })
                 .then(res=>{
                     const elementIndex=this.state.category.categories.map(data=>data.id).indexOf(id)
                     this.state.category.categories.splice(elementIndex,1)

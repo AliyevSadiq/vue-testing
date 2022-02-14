@@ -1,8 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import CategoryEdit from "../views/CategoryEdit";
-import CreateCategory from "../views/CreateCategory";
-import Categories from "../views/Categories";
+import Home from '@/views/Home.vue'
+import CategoryEdit from "@/views/CategoryEdit";
+import CreateCategory from "@/views/CreateCategory";
+import Categories from "@/views/Categories";
+import Login from "@/views/Login";
+import Register from "@/views/Register";
+import auth from '@/middleware/auth'
+import guest from '@/middleware/guest'
 
 const routes = [
   {
@@ -14,6 +18,7 @@ const routes = [
   {
     path: '/categories',
     name: 'category.list',
+    beforeEnter: auth,
     meta:{layout:'main'},
     component: Categories
   },
@@ -28,7 +33,21 @@ const routes = [
     name: 'category.edit',
     meta:{layout:'main'},
     component:CategoryEdit
-  }
+  },
+  {
+    path: '/login',
+    name: 'login',
+    beforeEnter: guest,
+    //meta:{layout:'main'},
+    component: Login
+  },
+  {
+    path: '/register',
+    name: 'register',
+    beforeEnter: guest,
+    //meta:{layout:'main'},
+    component: Register
+  },
 ]
 
 const router = createRouter({

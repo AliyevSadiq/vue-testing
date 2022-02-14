@@ -12,6 +12,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
+    beforeEnter: auth,
     meta:{layout:'main'},
     component: Home
   },

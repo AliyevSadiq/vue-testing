@@ -1,5 +1,5 @@
-import axios from "axios";
 import router from "@/router";
+import {privateInstance, publicInstance} from "@/config/axios";
 export default {
     state:{
         authenticated:false,
@@ -19,7 +19,7 @@ export default {
     },
     actions: {
         async login(ctx, {formData}) {
-            await axios.post('http://127.0.0.1:8000/api/auth/login', formData)
+            await publicInstance.post('/auth/login', formData)
                 .then(res => {
                    if (res.status===200){
                        localStorage.setItem('authToken',res.data.data.token)
@@ -30,7 +30,7 @@ export default {
                 .catch(error => ctx.commit("setValidation",error.response.data.message))
         },
         async register(ctx, {formData}) {
-            await axios.post('http://127.0.0.1:8000/api/auth/register', formData)
+            await publicInstance.post('/auth/register', formData)
                 .then(res => {
                     if (res.status===200){
                         localStorage.setItem('authToken',res.data.data.token)
@@ -41,9 +41,7 @@ export default {
         },
         async logout(ctx) {
 
-            await axios.post('http://127.0.0.1:8000/api/auth/logout',{},{
-                headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
-            })
+            await privateInstance.post('/auth/logout',{})
                 .then(res => {
                         localStorage.removeItem('authToken')
                         ctx.commit("clearAuth")

@@ -35,9 +35,6 @@ export default {
             await privateInstance.get("/category")
                 .then(res => res.data)
                 .then(res => {
-                    ctx.commit("clearValidation")
-                    ctx.commit("clearSuccess")
-                    ctx.commit("clearError")
                     ctx.commit("clearForm")
                     ctx.commit("setCategoryList", res.data)
                 }).catch(error => {
@@ -59,24 +56,16 @@ export default {
        async createCategory(ctx, {formData}) {
             await privateInstance.post("/category", formData)
                 .then(function (response) {
-                    ctx.commit("clearValidation")
+                    // ctx.commit("clearValidation")
                     ctx.commit("setSuccess",true)
                     ctx.commit("clearForm")
-                })
-                .catch(function (error) {
-                    ctx.commit("clearSuccess")
-                    ctx.commit("setValidation",error.response.data.errors);
                 })
         },
         async updateCategory(ctx, {formData,id}) {
             await privateInstance.put(`/category/${id}`, formData)
                 .then(function (response) {
-                    ctx.commit("clearValidation")
+                    // ctx.commit("clearValidation")
                     ctx.commit("setSuccess",true)
-                })
-                .catch(function (error) {
-                    ctx.commit("clearSuccess")
-                    ctx.commit("setValidation",error.response.data.errors);
                 })
         },
         async deleteCategory(ctx,id){

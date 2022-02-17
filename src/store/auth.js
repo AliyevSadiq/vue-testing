@@ -27,7 +27,6 @@ export default {
                        router.push({name:'home'})
                    }
                 })
-                .catch(error => ctx.commit("setValidation",error.response.data.message))
         },
         async register(ctx, {formData}) {
             await publicInstance.post('/auth/register', formData)
@@ -37,7 +36,6 @@ export default {
                         router.push({name:'home'})
                     }
                 })
-                .catch(error => ctx.commit("setValidation",error.response.data))
         },
         async logout(ctx) {
 

@@ -13,7 +13,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="category in getCategoryList" :key="category.id">
+      <tr v-for="category in categories" :key="category.id">
         <th scope="row">{{category.id}}</th>
         <td>{{category.title}}</td>
         <td>
@@ -40,6 +40,10 @@ export default {
   async mounted() {
     await this.fetchCategories()
   },
-  computed:mapGetters(["getCategoryList"])
+  computed:{
+    ...mapGetters({
+      categories:"getCategoryList"
+    })
+  }
 }
 </script>

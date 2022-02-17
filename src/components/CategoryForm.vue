@@ -3,10 +3,10 @@
   <form @submit.prevent="submitHandler">
     <div class="form-group">
       <label for="title">Title</label>
-      <input type="text" :class="{'is-invalid':getValidationError.title}"
+      <input type="text" :class="{'is-invalid':validation.title}"
              class="form-control"
              v-model="form.title" id="title" placeholder="Enter title">
-      <div class="invalid-feedback" v-if="getValidationError.title">{{getValidationError.title[0]}}</div>
+      <div class="invalid-feedback" v-if="validation.title">{{validation.title[0]}}</div>
     </div>
     <div class="form-group">
       <label for="body">Description</label>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import {mapGetters,mapMutations} from "vuex";
+import {mapGetters} from "vuex";
 import SuccessAlert from "./SuccessAlert";
 
 export default {
@@ -35,6 +35,11 @@ export default {
       })
     },
   },
-  computed:mapGetters(["getValidationError","isSuccess"])
+  computed:{
+    ...mapGetters({
+      validation:"getValidationError",
+      isSuccess:"isSuccess"
+    })
+  }
 }
 </script>

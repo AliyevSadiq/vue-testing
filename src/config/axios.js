@@ -37,6 +37,18 @@ privateInstance.interceptors.request.use(
         Promise.reject(error)
     });
 
+
+publicInstance.interceptors.response.use(function (response) {
+    return response;
+}, async function (error) {
+    store.commit("clearSuccess")
+    if (error.response.status === 422) {
+        store.commit("setValidation", error.response.data.errors);
+    }
+    return Promise.reject(error);
+});
+
+
 privateInstance.interceptors.response.use(function (response) {
     store.commit("clearValidation");
     store.commit("clearSuccess");
@@ -50,6 +62,7 @@ privateInstance.interceptors.response.use(function (response) {
         router.push({name: 'login'})
     }
     if (error.response.status === 422) {
+        console.log(error.response.data.errors)
         store.commit("setValidation", error.response.data.errors);
     }
     return Promise.reject(error);

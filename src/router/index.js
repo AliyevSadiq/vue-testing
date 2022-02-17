@@ -4,7 +4,9 @@ import CategoryEdit from "@/views/CategoryEdit";
 import CreateCategory from "@/views/CreateCategory";
 import Categories from "@/views/Categories";
 import Login from "@/views/Login";
+import ArticleCreate from "@/views/ArticleCreate";
 import Register from "@/views/Register";
+import ArticleEdit from "@/views/ArticleEdit";
 import auth from '@/middleware/auth'
 import guest from '@/middleware/guest'
 
@@ -15,6 +17,20 @@ const routes = [
     beforeEnter: auth,
     meta:{layout:'main'},
     component: Home
+  },
+  {
+    path: '/article/create',
+    name: 'article.create',
+    beforeEnter: auth,
+    meta:{layout:'main'},
+    component: ArticleCreate
+  },
+  {
+    path: '/article/:id',
+    name: 'article.edit',
+    beforeEnter: auth,
+    meta:{layout:'main'},
+    component:ArticleEdit
   },
   {
     path: '/categories',

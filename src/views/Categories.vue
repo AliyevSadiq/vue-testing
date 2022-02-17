@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="d-flex justify-content-end mb-2 mt-2">
-      <router-link class="btn btn-primary" to="/category/create">CREATE CATEGORY</router-link>
+      <router-link class="btn btn-primary" :to="{name:'category.create'}">CREATE CATEGORY</router-link>
     </div>
     <h1>Category list</h1>
     <table class="table">

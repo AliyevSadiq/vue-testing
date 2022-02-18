@@ -14,7 +14,7 @@
           <li class="nav-item">
             <router-link active-class="active" class="nav-link" to="/categories">Categories</router-link>
           </li>
-          <li class="nav-item" v-if="isAuth">
+          <li class="nav-item" >
             <a  class="nav-link" @click.prevent="logoutHandler">Logout</a>
           </li>
         </ul>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import {mapGetters,mapActions} from 'vuex'
+import {mapActions} from 'vuex'
 
 export default {
   name: "Navbar",
@@ -35,7 +35,6 @@ export default {
       this.logout()
     }
   },
-  computed:mapGetters(["isAuth"])
 }
 </script>
 

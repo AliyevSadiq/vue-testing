@@ -53,7 +53,7 @@ export default {
                     console.log(res.data)
                     ctx.commit("setForm",{
                         title:res.data.title,
-                        category_id:res.data.category,
+                        category_id:res.data.category_id,
                         description:res.data.description,
                     })
                 }).catch(error => {

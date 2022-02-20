@@ -12,7 +12,7 @@
       <label>Image</label>
       <input type="file" :class="{'is-invalid':validation.image}"
              class="form-control"
-             v-model="form.image" id="image"
+              id="image"
              @change="onFileChange"
       />
       <div class="invalid-feedback" v-if="validation.image">{{validation.image[0]}}</div>

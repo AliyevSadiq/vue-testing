@@ -42,22 +42,17 @@ export default {
                 .then(res => {
                     ctx.commit("clearForm")
                     ctx.commit("setArticleList", res.data)
-                }).catch(error => {
-                    ctx.commit("setError", true)
                 })
         },
         async fetchArticle(ctx,id) {
             await privateInstance.get(`/article/${id}`)
                 .then(res => res.data)
                 .then(res => {
-                    console.log(res.data)
                     ctx.commit("setForm",{
                         title:res.data.title,
                         category_id:res.data.category_id,
                         description:res.data.description,
                     })
-                }).catch(error => {
-                    ctx.commit("setError", true)
                 })
         },
         async createArticle(ctx,{formData}){
@@ -79,8 +74,6 @@ export default {
                     const elementIndex=this.state.article.articles.map(data=>data.id).indexOf(id)
                     this.state.article.articles.splice(elementIndex,1)
                     ctx.commit("setArticleList",this.state.article.articles);
-                }).catch(error=>{
-                    ctx.commit("setError",true)
                 })
 
         }

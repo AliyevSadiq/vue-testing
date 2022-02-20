@@ -7,6 +7,7 @@ import Login from "@/views/Login";
 import ArticleCreate from "@/views/ArticleCreate";
 import Register from "@/views/Register";
 import ArticleEdit from "@/views/ArticleEdit";
+import Error from "@/views/Error";
 import auth from '@/middleware/auth'
 import guest from '@/middleware/guest'
 
@@ -54,6 +55,13 @@ const routes = [
     component:CategoryEdit
   },
   {
+    path: '/error',
+    name: 'error.page',
+    beforeEnter: auth,
+    meta:{layout:'main'},
+    component:Error
+  },
+  {
     path: '/login',
     name: 'login',
     beforeEnter: guest,
@@ -64,7 +72,7 @@ const routes = [
     path: '/register',
     name: 'register',
     beforeEnter: guest,
-    //meta:{layout:'main'},
+    meta:{layout:'auth'},
     component: Register
   },
 ]

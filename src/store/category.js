@@ -37,8 +37,6 @@ export default {
                 .then(res => {
                     ctx.commit("clearForm")
                     ctx.commit("setCategoryList", res.data)
-                }).catch(error => {
-                    ctx.commit("setError", true)
                 })
         },
         async fetchCategory(ctx,id) {
@@ -49,8 +47,6 @@ export default {
                         title:res.data.title,
                         body:res.data.body,
                     })
-                }).catch(error => {
-                    ctx.commit("setError", true)
                 })
         },
        async createCategory(ctx, {formData}) {
@@ -69,13 +65,11 @@ export default {
                 })
         },
         async deleteCategory(ctx,id){
-            await privateInstance.delete(`/category/${id}`,)
+            await privateInstance.delete(`/category/${id}`)
                 .then(res=>{
                     const elementIndex=this.state.category.categories.map(data=>data.id).indexOf(id)
                     this.state.category.categories.splice(elementIndex,1)
                     ctx.commit("setCategoryList",this.state.category.categories);
-                }).catch(error=>{
-                    ctx.commit("setError",true)
                 })
 
         }

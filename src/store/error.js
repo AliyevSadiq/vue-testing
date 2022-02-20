@@ -1,17 +1,29 @@
+import router from "../router";
+
 export default {
     state:{
-        error:false
+        error:{
+            status:"",
+            message:""
+        }
     },
     mutations:{
         setError(state, error) {
+            console.log(error)
             state.error=error
         },
         clearError(state) {
-            state.error=false
+            state.error={
+                status:"",
+                message:""
+            }
         }
     },
     getters:{
-        isError(state){
+        fetchError(state){
+            if (state.error.message.length===0){
+                router.push({name:"home"})
+            }
             return state.error
         }
     }

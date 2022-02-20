@@ -45,7 +45,6 @@ export default {
                         ctx.commit("clearAuth")
                         router.push({name:'login'})
                 })
-                .catch(error => ctx.commit("setError",error.response.data))
         }
     }
 }

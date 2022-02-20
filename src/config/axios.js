@@ -61,9 +61,19 @@ privateInstance.interceptors.response.use(function (response) {
         localStorage.removeItem("authToken")
         router.push({name: 'login'})
     }
+
     if (error.response.status === 422) {
-        console.log(error.response.data.errors)
         store.commit("setValidation", error.response.data.errors);
     }
+    if (error.response.status===404){
+        const errorData={
+            message:error.response.data.error,
+            status:error.response.status
+        }
+        store.commit("setError",errorData)
+        router.push({name:'error.page'})
+    }
+
+
     return Promise.reject(error);
 });
